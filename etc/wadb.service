@@ -1,0 +1,25 @@
+[Unit]
+Description=WADB discord bot for World of Warcraft emulators
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+RemainAfterExit=yes
+WorkingDirectory=/opt/wadb
+User=wadb
+Group=wadb
+
+ExecStart=/usr/bin/tmux new -d -s "wadb" "/opt/virtualenvs/wadb/bin/python3 main.py"
+ExecStop=/usr/bin/tmux send -t wadb 'Shuting down wadb' C-m
+
+# SECURITY
+PrivateUsers=true
+ProtectSystem=full
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+
+Restart=on-failure
+RestartSec=60s
