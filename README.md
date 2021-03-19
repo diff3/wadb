@@ -8,7 +8,7 @@
 
 - For now, it only works with Alpha-core
 
-  
+
 
 ## Install guide
 
@@ -22,10 +22,9 @@ apt install python3 tmux
 pip3 install virtualenv virtualenvwrapper
 
 # create home dir and create user, give it a proper password!
-mkdir -p /opt/wadb
 adduser --home /opt/wadb wadb
 
-cd /opt/wadb
+cd /opt
 
 # download repository
 git clone https://github.com/diff3/wadb
@@ -83,11 +82,11 @@ Everything with tmux is handlet by short commands. For most beginner commands it
 # to create a new session
 tmux
 
-# create a session and name it. 
+# create a session and name it.
 tmux new -s "HelloWorld"
 
 # attach to a session
-tmux a -t "0" # if you fogot to name it. 
+tmux a -t "0" # if you fogot to name it.
 tmux a -t "HelloWorld"
 
 tmux ls # list active sessions
@@ -179,10 +178,10 @@ ExecStart=/usr/bin/tmux new -d -s "wadb" "/opt/virtualenvs/wadb/bin/python3 main
 ExecStop=/usr/bin/tmux send -t wadb 'Shuting down wadb' C-m
 
 # SECURITY
-PrivateUsers=true 
-ProtectSystem=full 
-ProtectHome=true 
-ProtectKernelTunables=true 
+PrivateUsers=true
+ProtectSystem=full
+ProtectHome=true
+ProtectKernelTunables=true
 ProtectControlGroups=true
 
 Restart=on-failure
