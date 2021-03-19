@@ -62,7 +62,7 @@ class Alpha:
         SQL = "INSERT INTO accounts (name, password, ip, gmlevel) VALUES (%s, %s, %s, %s)"
         tpl = (lst[1], pwd, "0.0.0.0", 0)
 
-        accountid = Mysqld("Alpha_realm").insert(SQL, tpl)
+        accountid = Mysqld("alpha_realm").insert(SQL, tpl)
 
         SQL = "INSERT INTO discord (account, discord_id, emulator) VALUES (%s, %s, %s)"
         tpl = (accountid, id, "alpha-core")
@@ -98,7 +98,7 @@ class Alpha:
             AND discord.emulator = 'alpha-core'"""
 
         tpl = (id, account)
-        result = Mysqld("Alpha_realm").insert(SQL, tpl)
+        result = Mysqld("alpha_realm").insert(SQL, tpl)
 
         return 'Account deleted'
 
@@ -107,7 +107,7 @@ class Alpha:
         SQL = "SELECT count(name) FROM accounts WHERE name = %s"
         tpl = (account, )
 
-        result = Mysqld("Alpha_realm").query(SQL, tpl)
+        result = Mysqld("alpha_realm").query(SQL, tpl)
 
         if int(result[0][0]) > 0:
             return True
@@ -116,14 +116,14 @@ class Alpha:
 
     @staticmethod
     def account_is_perhaps_yours(id, account):
-        SQL = """SELECT count(a.name) FROM Alpha_realm.accounts a
+        SQL = """SELECT count(a.name) FROM alpha_realm.accounts a
                     INNER JOIN wadb.discord w
                     ON w.account = a.id
                     WHERE w.discord_id = %s
                     AND a.name = %s"""
 
         tpl = (id, account)
-        yours = Mysqld("Alpha_realm").query(SQL, tpl)
+        yours = Mysqld("alpha_realm").query(SQL, tpl)
 
         if yours[0][0] <= 0:
             return False
@@ -137,7 +137,7 @@ class Alpha:
         SQL = "SELECT name FROM wadb.discord as w, alpha_realm.accounts as ara WHERE ara.id in (w.account) AND w.discord_id = %s"
         tpl = (id, )
 
-        result = Mysqld("Alpha_realm").query(SQL, tpl)
+        result = Mysqld("alpha_realm").query(SQL, tpl)
 
         if len(result) <= 0:
             return 'You have no account'
@@ -178,7 +178,7 @@ class Alpha:
                     AND wadb.discord.discord_id = %s"""
 
         tpl = (pwd, account, id)
-        result = Mysqld("Alpha_realm").insert(SQL, tpl)
+        result = Mysqld("alpha_realm").insert(SQL, tpl)
 
         return 'Password updated'
 
@@ -221,12 +221,12 @@ class Alpha:
 
     @staticmethod
     def num_player_online():
-        result = Mysqld("Alpha_realm").query("SELECT COUNT(online) FROM characters WHERE online='1'") # noqa
+        result = Mysqld("alpha_realm").query("SELECT COUNT(online) FROM characters WHERE online='1'") # noqa
         return "with {} online".format(result[0][0])
 
     @staticmethod
     def who_is_online():
-        result = Mysqld("Alpha_realm").query("SELECT name, race, class, level, online FROM characters WHERE online='1'")
+        result = Mysqld("alpha_realm").query("SELECT name, race, class, level, online FROM characters WHERE online='1'")
 
         msg = str()
         for row in result:
