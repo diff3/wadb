@@ -21,6 +21,8 @@ apt install python3 tmux
 # Python3 dependencies
 pip3 install virtualenv virtualenvwrapper
 
+cd /opt
+
 # download repository
 git clone https://github.com/diff3/wadb
 
@@ -37,7 +39,7 @@ mkvirtualenv wadb
 pip3 install -r requirements.txt
 
 # env
-mv cp etc/env.dist .env
+cp etc/env.dist .env
 
 # edit the .env file and att your credentials.
 # also add the token you got from [Discord dev page]
@@ -58,12 +60,12 @@ python3 main.py
 ```Bash
 # install wadb.service and start it.
 cp etc/wadb.service /etc/systemd/system
-systemctl daemon-reload wadb
+systemctl daemon-reload
 systemctl enable wadb
 systemctl start wadb
 ```
 
-
+Now you are done, below is just extra information.
 
 ### Tmux
 
