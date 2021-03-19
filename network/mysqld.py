@@ -5,8 +5,6 @@
 Bot for connecting Discord and Alpha-core emulator
 
 Written by Entropy 2021
-
-TODO: Make database independen from Alpha Core
 """
 
 from dotenv import load_dotenv
@@ -32,7 +30,7 @@ class Mysqld:
         )
         self.cursor = self.conn.cursor(buffered=True)
 
-    def insert(self, SQL, tpl=None, database='Alpha_realm'):
+    def insert(self, SQL, tpl=None, database='alpha_realm'):
         self.cursor.execute(SQL, tpl)
         id = self.cursor.lastrowid
         self.conn.commit()
@@ -40,7 +38,7 @@ class Mysqld:
 
         return id
 
-    def delete(self, SQL, tpl=None, database='Alpha_realm'):
+    def delete(self, SQL, tpl=None, database='alpha_realm'):
         self.cursor.execute(SQL, tpl)
         id = self.cursor.lastrowid
         self.conn.commit()
@@ -50,13 +48,6 @@ class Mysqld:
 
     def query(self, SQL, tpl=None):
         result = None
-
-        """if tpl:
-            self.cursor.execute(SQL, tpl)
-            result = self.cursor.fetchall()
-        else:
-            self.cursor.execute(SQL)
-            result = self.cursor.fetchall()"""
 
         self.cursor.execute(SQL, tpl)
         result = self.cursor.fetchall()

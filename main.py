@@ -5,8 +5,6 @@
 Bot for connecting Discord and Alpha-core emulator
 
 Written by Entropy 2021
-
-TODO: Make database independen from Alpha Core
 """
 
 from emulators.alpha_core import Alpha
