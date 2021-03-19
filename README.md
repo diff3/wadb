@@ -21,20 +21,19 @@ apt install python3 tmux
 # Python3 dependencies
 pip3 install virtualenv virtualenvwrapper
 
+# download repository
+git clone https://github.com/diff3/wadb
+
 # create home dir and create user, give it a proper password!
 adduser --home /opt/wadb wadb
 
-cd /opt
-
-# download repository
-git clone https://github.com/diff3/wadb
+cd /opt/wadb
 
 # database. Change password in the SQL file before running it!
 mysql -u root -p < /opt/wadb/etc/db-setup.sql
 
 # Python virtualenv
 mkvirtualenv wadb
-cd /opt/wadb
 pip3 install -r requirements.txt
 
 # env
@@ -43,6 +42,8 @@ mv cp etc/env.dist .env
 # edit the .env file and att your credentials.
 # also add the token you got from [Discord dev page]
 # you can now start wadb by typing
+
+chown wadb:wadb -R /opt/wadb
 
 workin wadb # if needed
 python3 main.py
